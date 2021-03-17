@@ -1,0 +1,117 @@
+swagger: "2.0"
+info:
+  description: "go-demo-app"
+  version: "1.0.0"
+  title: "Go Demo App"
+  contact:
+    url: "https://marukhno.com"
+host: "YOUR_HOST:YOUR_PORT"
+schemes:
+- "http"
+- "https"
+paths:
+  /ping:
+    get:
+      summary: "Health status for the service"
+      description: "Returns a JSON with info about available methods"
+      operationId: "getPing"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Ping"
+  /ticker:
+    get:
+      summary: "Get a ticker data"
+      description: "Returns a JSON with ticker data"
+      operationId: "getTicker"
+      produces:
+      - "application/json"
+      parameters:
+      - in: query
+        name: ticker
+        type: string
+        required: true
+        description: ticker name (AAPL, TSLA, IBM)
+      responses:
+        "200":
+          description: "successful operation: ticker found"
+          schema:
+            $ref: "#/definitions/Ticker"
+  /order:
+    get:
+      summary: "Get an order details by id"
+      description: "Returns a JSON with order details"
+      operationId: "getOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - in: query
+        name: id
+        type: integer
+        required: true
+        description: order id
+      responses:
+        "200":
+          description: "successful operation: order found"
+          schema:
+            $ref: "#/definitions/OrderDB"
+    post:
+      summary: "Place an order"
+      description: "Places the order"
+      operationId: "postOrder"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: body
+          name: user
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/Order"
+      responses:
+        "200":
+          description: "successful operation: order placed"
+          schema:
+            properties:
+              id:
+                type: integer
+definitions:
+  Ping:
+    type: "object"
+    properties:
+      health:
+        type: "string"
+      getTicker:
+        type: "string"
+      getOrder:
+        type: "string"
+      postOrder:
+        type: "string"
+  Ticker:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      title:
+        type: "string"
+      price:
+        type: "string"
+  OrderDB:
+    type: "object"
+    properties:
+      ticker:
+        type: "string"
+      price:
+        type: "number"
+      created:
+        type: "string"
+  Order:
+    type: "object"
+    properties:
+      ticker:
+        type: "string"
+      price:
+        type: "number"
+
