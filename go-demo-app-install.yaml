@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: go-demo-app
-          image: v101.158.177.255.242.nip.io:5443/go-demo-app:1.0.0
+          image: YOUR_REGISTRY_HOST:YOUR_REGISTRY_PORT/go-demo-app:1.0.0
           env:
             - name: DATABASE_URL
               value: "go-demo-app-postgres:5432/docker"
